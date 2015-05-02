@@ -1,0 +1,44 @@
+Helpers
+
+    cr = 13;
+    lf = 10;
+    newline = cr | lf | cr lf;
+    space = ' ';
+    tab = 9;
+
+
+Tokens
+
+    whitespace = (newline | space | tab)+;
+    number = (['0'..'9'])+;
+    add = 43;
+    sub = '-';
+    mul = '*';
+    div = '/';
+    left = '(';
+    right = ')';
+
+
+Ignored Tokens
+
+   whitespace;
+
+
+Productions
+
+    exp = 
+    {top}   exp add term |
+    {next1} exp sub term |
+    {simple1}   term
+            ;
+
+    term =
+    {next2} term mul factor |
+    {next3} term div factor |
+    {simple2}   factor
+            ;
+
+    factor = 
+    {simple3}   number |
+    {simple4}   left exp right
+            ;
